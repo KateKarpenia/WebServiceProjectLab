@@ -10,6 +10,11 @@ public class Constants {
             "Content-Type: text/html\r\n" +
             "Connection: close\r\n\r\n";
 
+    public static final String UPDATED_RESPONSE = "HTTP/1.1 201 OK\r\n" +
+            "Server: Java Server/1.0\r\n" +
+            "Content-Type: text/html\r\n" +
+            "Connection: close\r\n\r\n";
+
     public static final String WELCOME = "Welcome to Library Resource";
 
     public static final String ERROR_RESPONSE = "HTTP/1.1 404 Resource Not Found\r\n" +
@@ -25,15 +30,12 @@ public class Constants {
 
     public static final String ADD_NEW_BOOK = "/book";
 
-    public static final String DELETE_BOOK = "/book/1";
+    public static final String DELETE_BOOK = "book/1";
 
-    public static final String UPDATE_BOOK = "/book";
+    public static final String UPDATE_BOOK = "book/1";
 
     public static final String GET_CURRENT_BOOK1 = "book/1";
 
-    public static final String GET_CURRENT_BOOK2 = "book/2";
-
-    public static final String WELCOME_PAGE = "/";
 
 
 

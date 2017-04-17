@@ -37,7 +37,7 @@ public class Request {
         uri = parseUri(request.toString());
         System.out.println("parse URI" + " " + uri);
 
-        method = request.substring(0, 5);
+        method = request.substring(0, 6);
         System.out.println("parse Method " + method);
 
     }

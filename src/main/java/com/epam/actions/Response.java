@@ -31,6 +31,12 @@ public class Response {
         outputStream.flush();
     }
 
+    public void writeUpdateResponse() throws IOException {
+        result = Constants.UPDATED_RESPONSE + body;
+        outputStream.write(result.getBytes());
+        outputStream.flush();
+    }
+
     public String getBody() {
         return body;
     }
