@@ -1,36 +1,28 @@
 package com.epam.actions;
 
-import com.epam.entity.Book;
 import com.epam.utils.Constants;
 
-import java.io.*;
-import java.util.*;
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * Created by Katerina_Karpenia on 4/14/2017.
  */
 public class Response {
 
-    private Request request;
     private OutputStream outputStream;
-    private String uri;
-    private int code;
     private String result;
+    private String body;
+    private String statusCode;
 
     public Response(OutputStream outputStream) {
         this.outputStream = outputStream;
     }
 
-    public void setRequest(Request request) {
-        this.request = request;
-    }
-
-
-    public void writeResponse() throws IOException {
-        result = Constants.SUCCESSFUL_RESPONSE + Constants.WELCOME;
+    public void write() throws IOException {
+        result = Constants.SUCCESSFUL_RESPONSE + body;
         outputStream.write(result.getBytes());
         outputStream.flush();
-
     }
 
     public void writeErrorResponse() throws IOException {
@@ -39,44 +31,19 @@ public class Response {
         outputStream.flush();
     }
 
-    public void writeResponseLibrary(List<Book> books) throws IOException {
-        result = Constants.SUCCESSFUL_RESPONSE + books;
-        outputStream.write(result.getBytes());
-        outputStream.flush();
+    public String getBody() {
+        return body;
     }
 
-    public void writeResponseBook(Book book) throws IOException {
-        result = Constants.SUCCESSFUL_RESPONSE + book;
-        outputStream.write(result.getBytes());
-        outputStream.flush();
+    public void setBody(String body) {
+        this.body = body;
     }
 
-
-    private String getHeader(int code) {
-        StringBuilder buffer = new StringBuilder();
-        buffer.append("HTTP/1.1 " + code + " " + getAnswer(code) + "\n");
-        buffer.append("Date: " + new Date().toString() + "\n");
-        buffer.append("Accept-Ranges: none\n");
-        buffer.append("\n");
-        System.out.println("getHeader " + buffer.toString());
-        return buffer.toString();
+    public String getStatusCode() {
+        return statusCode;
     }
 
-    private String getAnswer(int code) {
-        switch (code) {
-            case 200:
-                return "OK";
-            case 404:
-                return "Not Found";
-            default:
-                return "Internal Server Error";
-        }
+    public void setStatusCode(String statusCode) {
+        this.statusCode = statusCode;
     }
-
-
-
-
-
-
-
 }

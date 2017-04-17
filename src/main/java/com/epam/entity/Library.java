@@ -9,6 +9,7 @@ import java.util.List;
 public class Library {
 
     private static List<Book> books;
+    private static Book book;
 
     public static List<Book> getBooks() {
         List<Book> books = new ArrayList<Book>();
@@ -22,9 +23,34 @@ public class Library {
         return currentBook;
     }
 
+
     public static void addBook(Book book) {
-        List<Book> allBook = getBooks();
-        allBook.add(book);
+        List<Book> books = Library.getBooks();
+        books.add(book);
+//        System.out.println("All books " + books);
+    }
+
+    public static void deleteBook(Book deletedBook){
+
+        List<Book> books = Library.getBooks();
+        for (Book book : books) {
+            if (book.getId() == deletedBook.getId()) {
+                books.remove(book);
+            }
+        }
+
+    }
+
+    public static void updateBook(Book book) {
+
+        List<Book> books = Library.getBooks();
+        for (Book booksArray : books) {
+            if (booksArray.getId() == book.getId()) {
+                booksArray.setAuthor(book.getAuthor());
+                booksArray.setTitle(book.getTitle());
+                booksArray.setPages(book.getPages());
+            }
+        }
     }
 
 }

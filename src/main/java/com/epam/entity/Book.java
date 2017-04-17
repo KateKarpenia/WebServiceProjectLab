@@ -1,5 +1,8 @@
 package com.epam.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -11,22 +14,24 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlType(name = "Book", propOrder = {"id", "author", "title", "pages" })
 @XmlAccessorType(XmlAccessType.NONE)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Book {
 
     @XmlElement(required = true, name = "id")
+    @JsonProperty("id")
     private int id;
 
     @XmlElement(required = true, name = "author")
+    @JsonProperty("author")
     private String author;
 
     @XmlElement(required = true, name = "title")
+    @JsonProperty("title")
     private String title;
 
     @XmlElement(required = true, name = "pages")
+    @JsonProperty("pages")
     private int pages;
-
-    public Book() {
-    }
 
     public Book(int id, String author, String title, int pages) {
         this.id = id;

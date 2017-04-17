@@ -1,6 +1,7 @@
 package com.epam.actions;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Created by Katerina_Karpenia on 4/14/2017.
@@ -10,15 +11,14 @@ public class Request {
     private InputStream inputStream;
     private String uri;
     private String method;
+    private String body;
 
 
     public Request(InputStream inputStream)  {
         this.inputStream = inputStream;
-
     }
 
     public void parse() {
-        // Read a set of characters from the socket
         StringBuffer request = new StringBuffer(2048);
         int i;
         byte[] buffer = new byte[2048];
@@ -61,5 +61,11 @@ public class Request {
         return method;
     }
 
+    public String getBody() {
+        return body;
+    }
 
+    public void setBody(String body) {
+        this.body = body;
+    }
 }

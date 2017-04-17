@@ -2,8 +2,7 @@ package com.epam;
 
 import com.epam.actions.Request;
 import com.epam.actions.Response;
-import com.epam.entity.Library;
-import com.epam.utils.Constants;
+import com.epam.handler.Handler;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,8 +20,6 @@ public class SocketProcessor implements Runnable {
     private Response response;
     private InputStream inputStream;
     private OutputStream outputStream;
-    private String uri;
-    private String method;
 
     public SocketProcessor(Socket socket) {
         this.socket = socket;
@@ -35,29 +32,15 @@ public class SocketProcessor implements Runnable {
 
             request = new Request(inputStream);
             request.parse();
-            uri = request.getUri();
-            method = request.getMethod();
-
             response = new Response(outputStream);
-            response.setRequest(request);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         try {
-            if (method.startsWith(Constants.GET) && uri.endsWith(Constants.GET_BOOKS)) {
-                response.writeResponseLibrary(Library.getBooks());
-            } else if (method.startsWith(Constants.GET) && uri.endsWith(Constants.GET_CURRENT_BOOK1)) {
-                response.writeResponseBook(Library.getCurrentBook(1));
-            } else if (method.startsWith(Constants.GET) && uri.endsWith(Constants.GET_CURRENT_BOOK2)) {
-                response.writeResponseBook(Library.getCurrentBook(2));
-            } else if (method.startsWith(Constants.GET) && uri.endsWith(Constants.WELCOME_PAGE)) {
-                response.writeResponse();
-            }
-            else {
-                response.writeErrorResponse();
-            }
+            Handler currentHandler = HttpServer.chooseHandler(request);
+            currentHandler.getiHandler().handle(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();

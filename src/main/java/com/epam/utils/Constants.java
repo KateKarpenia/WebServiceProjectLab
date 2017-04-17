@@ -23,6 +23,12 @@ public class Constants {
 
     public static final String GET_BOOKS = "/books";
 
+    public static final String ADD_NEW_BOOK = "/book";
+
+    public static final String DELETE_BOOK = "/book/1";
+
+    public static final String UPDATE_BOOK = "/book";
+
     public static final String GET_CURRENT_BOOK1 = "book/1";
 
     public static final String GET_CURRENT_BOOK2 = "book/2";
