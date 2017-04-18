@@ -21,18 +21,27 @@ public class DeleteBook implements IHandler {
 
     private void response(Request request, Response response) throws IOException {
 
-        Book deletedBook;
-        try {
+        String body = " ";
+        String contentType = request.validateContentType(request.getContentType());
+        Book deletedBook = Library.getCurrentBook(2);
 
-            deletedBook = JsonUtils.fromJson(request.getBody(), Book.class);
+        try {
             Library.deleteBook(deletedBook);
-            response.setStatusCode(Constants.STATUS_CODE_200_OK);
+            body = JsonUtils.toJson(deletedBook);
+            response.write();
+
             System.out.println("Deleted book " + deletedBook);
+            response.setStatusCode(Constants.STATUS_CODE_200_OK);
 
         } catch (Exception e) {
             response.setStatusCode(Constants.STATUS_CODE_404);
         }
-        response.createResponse(response, request);
+        response.setContentType(contentType);
+        response.setContentLength(String.valueOf(body.getBytes().length));
+        response.setBody(body);
+        response.setVersion(request.getVersion());
+        response.write();
+        System.out.println(response.toString());
 
 
 
