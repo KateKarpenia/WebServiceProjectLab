@@ -4,9 +4,7 @@ import com.epam.actions.Request;
 import com.epam.actions.Response;
 import com.epam.handler.Handler;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.Socket;
 
 
@@ -30,8 +28,8 @@ public class SocketProcessor implements Runnable {
             inputStream = socket.getInputStream();
             outputStream = socket.getOutputStream();
 
-            request = new Request(inputStream);
-            request.parse();
+            request = new Request(new BufferedReader(new InputStreamReader(socket.getInputStream())));
+            System.out.println(request.toString());
             response = new Response(outputStream);
 
         } catch (IOException e) {

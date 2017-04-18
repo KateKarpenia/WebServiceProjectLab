@@ -4,6 +4,8 @@ import com.epam.utils.Constants;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Created by Katerina_Karpenia on 4/14/2017.
@@ -14,27 +16,94 @@ public class Response {
     private String result;
     private String body;
     private String statusCode;
+    private String version;
+    private String contentType;
+    private String contentLength;
 
     public Response(OutputStream outputStream) {
         this.outputStream = outputStream;
     }
 
+    public static void createResponse(Response resp, Request rq) {
+
+        String body = "";
+        resp.setVersion(rq.getVersion());
+        resp.setContentLength(String.valueOf(body.getBytes().length));
+        resp.setBody(body);
+        resp.setContentType(rq.getContentType());
+
+        try {
+            resp.write();
+        } catch (IOException e) {
+        }
+    }
+
     public void write() throws IOException {
-        result = Constants.SUCCESSFUL_RESPONSE + body;
-        outputStream.write(result.getBytes());
-        outputStream.flush();
+
+        Map<String, String> responseMap = new LinkedHashMap<String, String>();
+
+        responseMap.put(version, statusCode);
+
+        responseMap.put(Constants.SERVER, Constants.SERVER_VALUE);
+
+        if (!contentLength.isEmpty()) {
+            responseMap.put(Constants.CONTENT_TYPE, contentType + "\r\n");
+        }
+        if (!contentLength.isEmpty()) {
+            responseMap.put(Constants.CONTENT_LENGTH, contentLength + "\r\n");
+        }
+
+        responseMap.put(Constants.CONNECTION, Constants.CONNECTION_VALUE);
+
+        if (!body.isEmpty()) {
+            responseMap.put(Constants.BODY, body);
+        }
+
+        String response = "";
+
+
+        for (Map.Entry<String, String> pair : responseMap.entrySet()) {
+            String key = pair.getKey();
+            String value = pair.getValue();
+            if (key.equals(Constants.BODY)) {
+                response += value;
+            } else {
+                response += key + value;
+            }
+        }
+        outputStream.write(response.getBytes());
     }
 
-    public void writeErrorResponse() throws IOException {
-        String errorMessage = Constants.ERROR_RESPONSE + Constants.ERROR;
-        outputStream.write(errorMessage.getBytes());
-        outputStream.flush();
+    public String getVersion() {
+        return version;
     }
 
-    public void writeUpdateResponse() throws IOException {
-        result = Constants.UPDATED_RESPONSE + body;
-        outputStream.write(result.getBytes());
-        outputStream.flush();
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public String getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(String statusCode) {
+        this.statusCode = statusCode;
+    }
+
+    public String getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    public String getContentLength() {
+        return contentLength;
+    }
+
+    public void setContentLength(String contentLength) {
+        this.contentLength = contentLength;
     }
 
     public String getBody() {
@@ -45,11 +114,19 @@ public class Response {
         this.body = body;
     }
 
-    public String getStatusCode() {
-        return statusCode;
+
+
+    @Override
+    public String toString() {
+        return "Response{" +
+                "outputStream =" + outputStream +
+                ", version='" + version + '\'' +
+                ", statusCode='" + statusCode + '\'' +
+                ", contentType='" + contentType + '\'' +
+                ", contentLength='" + contentLength + '\'' +
+                ", body='" + body + '\'' +
+                '}';
     }
 
-    public void setStatusCode(String statusCode) {
-        this.statusCode = statusCode;
-    }
+
 }

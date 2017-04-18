@@ -5,6 +5,8 @@ import com.epam.actions.Response;
 import com.epam.entity.Book;
 import com.epam.entity.Library;
 import com.epam.handler.IHandler;
+import com.epam.utils.Constants;
+import com.epam.utils.JsonUtils;
 
 import java.io.IOException;
 
@@ -16,17 +18,25 @@ public class GetCurrentBook implements IHandler {
         response(request, response);
     }
 
-    private void response(Request request, Response response) {
+    private void response(Request request, Response response) throws IOException {
 
+        String body = " ";
+        String contentType = request.validateContentType(request.getContentType());
+        new Library();
         Book book = Library.getCurrentBook(1);
-        String currentBook = book.toString();
+
         try {
-            response.setBody(currentBook);
-            response.write();
-            System.out.println("GetBook " + currentBook);
-        } catch (IOException e) {
-            e.printStackTrace();
+            body = JsonUtils.toJson(book);
+            response.setStatusCode(Constants.STATUS_CODE_200_OK);
+        } catch (Exception e) {
+            response.setStatusCode(Constants.STATUS_CODE_404);
         }
+
+        response.setContentType(contentType);
+        response.setContentLength(String.valueOf(body.getBytes().length));
+        response.setBody(body);
+        response.setVersion(request.getVersion());
+        response.write();
 
     }
 }

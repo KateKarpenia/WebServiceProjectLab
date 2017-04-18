@@ -44,6 +44,7 @@ public class Handler implements IHandler{
     }
 
     public IHandler getiHandler() {
+        System.out.println("getIHandler " + iHandler);
         return iHandler;
     }
 

@@ -30,12 +30,10 @@ public class Library {
         return currentBook;
     }
 
-
     public static void addBook(Book book) {
-        new Library();
-        List<Book> books = Library.getBooks();
         books.add(book);
     }
+
 
     public static void deleteBook(Book deletedBook){
         new Library();

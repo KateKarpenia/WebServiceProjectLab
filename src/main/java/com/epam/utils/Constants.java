@@ -5,36 +5,56 @@ package com.epam.utils;
  */
 public class Constants {
 
-    public static final String SUCCESSFUL_RESPONSE = "HTTP/1.1 200 OK\r\n" +
-            "Server: Java Server/1.0\r\n" +
-            "Content-Type: text/html\r\n" +
-            "Connection: close\r\n\r\n";
-
-    public static final String UPDATED_RESPONSE = "HTTP/1.1 201 OK\r\n" +
-            "Server: Java Server/1.0\r\n" +
-            "Content-Type: text/html\r\n" +
-            "Connection: close\r\n\r\n";
-
-    public static final String WELCOME = "Welcome to Library Resource";
-
-    public static final String ERROR_RESPONSE = "HTTP/1.1 404 Resource Not Found\r\n" +
-            "Server: Java Server/1.0\r\n" +
-            "Content-Type: text/html\r\n" +
-            "Connection: close \r\n\r\n";
-
-    public static final String ERROR = "Resurce Not Found";
 
     public static final String GET = "GET";
 
+    public static final String POST = "POST";
+
+    public static final String PUT = "PUT";
+
+    public static final String DELETE = "DELETE";
+
     public static final String GET_BOOKS = "/books";
 
-    public static final String ADD_NEW_BOOK = "/book";
+    public static final String ADD_NEW_BOOK = "/book/4";
 
-    public static final String DELETE_BOOK = "book/1";
+    public static final String DELETE_BOOK = "/book/2";
 
-    public static final String UPDATE_BOOK = "book/1";
+    public static final String UPDATE_BOOK = "/book";
 
-    public static final String GET_CURRENT_BOOK1 = "book/1";
+    public static final String GET_CURRENT_BOOK1 = "/book/1";
+
+    public static final String CONTENT_LENGTH = "Content-Length:";
+
+    public static final String COLON_SPLITTER = ":";
+
+    public static final int PATH = 1;
+
+    public static final String SPACE = " ";
+
+    public static final int VERSION = 2;
+
+    public static final int VALUE = 1;
+
+    public static final String CONTENT_TYPE = "Content-Type:";
+
+    public static final String SERVER = "Server:";
+
+    public static final String SERVER_VALUE = "Java \r\n";
+
+    public static final String CONNECTION = "Connection:";
+
+    public static final String CONNECTION_VALUE = "close\r\n\r\n";
+
+    public static final String BODY = "body";
+
+    public static final String STATUS_CODE_200_OK = " 200 OK \r\n";
+
+    public static final  String STATUS_CODE_404 = " 404 Not Found\r\n";
+
+    public static final String STATUS_CODE_201 = " 201 Created \r\n";
+
+    public static final String STATUS_CODE_400= "400 Bad Request \r\n";
 
 
 

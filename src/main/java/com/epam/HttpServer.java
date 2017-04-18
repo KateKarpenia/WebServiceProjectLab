@@ -33,18 +33,19 @@ public class HttpServer {
         }
     }
 
-    public static Handler chooseHandler(Request request) {
-        Handler commonHandler = new Handler(null, null, new Handler());
-        String requestMethod = request.getMethod();
-        String requestUri = request.getUri();
+    public static Handler chooseHandler(Request rq) throws IOException {
+
+        String methodFromRequest = rq.getMethod();
+        String pathFromRequest = rq.getPath();
 
         for (Handler handler : handlers) {
-            if (requestMethod.startsWith(handler.getMethod()) && requestUri.endsWith(handler.getUri())) {
+            if (methodFromRequest.equals(handler.getMethod()) && handler.getUri().contains(pathFromRequest)) {
                 return handler;
             }
         }
-        return commonHandler;
+        return null;
     }
+
 
     public void invokeHandler(String method, String uri, IHandler iHandler) {
         handlers.add(new Handler(method, uri, iHandler));

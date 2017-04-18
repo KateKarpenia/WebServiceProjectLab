@@ -5,6 +5,8 @@ import com.epam.actions.Response;
 import com.epam.entity.Book;
 import com.epam.entity.Library;
 import com.epam.handler.IHandler;
+import com.epam.utils.Constants;
+import com.epam.utils.JsonUtils;
 
 import java.io.IOException;
 
@@ -18,16 +20,22 @@ public class DeleteBook implements IHandler {
     }
 
     private void response(Request request, Response response) throws IOException {
-        try {
-            Book deletedBook = Library.getCurrentBook(1);
-            response.setBody(String.valueOf(deletedBook));
-            Library.deleteBook(deletedBook);
-            response.write();
 
+        Book deletedBook;
+        try {
+
+            deletedBook = JsonUtils.fromJson(request.getBody(), Book.class);
+            Library.deleteBook(deletedBook);
+            response.setStatusCode(Constants.STATUS_CODE_200_OK);
             System.out.println("Deleted book " + deletedBook);
 
         } catch (Exception e) {
-            response.writeErrorResponse();
+            response.setStatusCode(Constants.STATUS_CODE_404);
         }
+        response.createResponse(response, request);
+
+
+
+
     }
 }
