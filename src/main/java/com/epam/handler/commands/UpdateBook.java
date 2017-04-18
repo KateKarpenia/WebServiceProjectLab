@@ -20,18 +20,29 @@ public class UpdateBook implements IHandler {
     }
 
     private void response(Request request, Response response) throws IOException {
-        Book updatedBook;
-        try {
-            updatedBook = JsonUtils.fromJson(request.getBody(), Book.class);
-            Library.updateBook(updatedBook);
 
+        String body = " ";
+        String contentType = request.validateContentType(request.getContentType());
+
+        try {
+
+            Book updatedBook = Library.getCurrentBook(1);
+            updatedBook.setPages(45454);
+            Library.updateBook(updatedBook);
+            body = JsonUtils.toJson(updatedBook);
+
+            System.out.println("updated book " + updatedBook);
             response.setStatusCode(Constants.STATUS_CODE_200_OK);
 
-            System.out.println("Updated book " + updatedBook);
         } catch (Exception e) {
             response.setStatusCode(Constants.STATUS_CODE_404);
         }
-        response.createResponse(response, request);
-        System.out.println("Response " + response.getStatusCode());
+        response.setContentType(contentType);
+        response.setContentLength(String.valueOf(body.getBytes().length));
+        response.setBody(body);
+        response.setVersion(request.getVersion());
+        response.write();
+        System.out.println(response.toString());
+
     }
 }

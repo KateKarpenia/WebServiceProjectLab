@@ -20,7 +20,7 @@ public class Constants {
 
     public static final String DELETE_BOOK = "/book/2";
 
-    public static final String UPDATE_BOOK = "/book";
+    public static final String UPDATE_BOOK = "/book/1";
 
     public static final String GET_CURRENT_BOOK1 = "/book/1";
 

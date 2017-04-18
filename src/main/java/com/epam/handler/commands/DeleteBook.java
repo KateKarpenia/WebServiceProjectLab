@@ -28,7 +28,6 @@ public class DeleteBook implements IHandler {
         try {
             Library.deleteBook(deletedBook);
             body = JsonUtils.toJson(deletedBook);
-            response.write();
 
             System.out.println("Deleted book " + deletedBook);
             response.setStatusCode(Constants.STATUS_CODE_200_OK);
