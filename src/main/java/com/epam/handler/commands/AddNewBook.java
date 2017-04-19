@@ -9,7 +9,6 @@ import com.epam.utils.Constants;
 import com.epam.utils.JsonUtils;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Created by Katerina_Karpenia on 4/17/2017.
@@ -24,7 +23,7 @@ public class AddNewBook implements IHandler {
         String body = " ";
         String contentType = request.validateContentType(request.getContentType());
         new Library();
-        Book newBook = new Book(4, "sdsd", "dfdfd", 34);
+        Book newBook = new Book(4, "Herbert Schildt ", "Java 1.1: The Complete Reference", 345);
         Library.addBook(newBook);
 
         try {

@@ -16,7 +16,7 @@ public class Constants {
 
     public static final String GET_BOOKS = "/books";
 
-    public static final String ADD_NEW_BOOK = "/book/4";
+    public static final String ADD_NEW_BOOK = "/book/new";
 
     public static final String DELETE_BOOK = "/book/2";
 
