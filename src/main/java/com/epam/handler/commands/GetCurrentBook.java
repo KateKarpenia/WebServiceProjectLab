@@ -37,6 +37,7 @@ public class GetCurrentBook implements IHandler {
         response.setBody(body);
         response.setVersion(request.getVersion());
         response.write();
+        System.out.println(response.toString());
 
     }
 }

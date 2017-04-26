@@ -23,7 +23,7 @@ public class AddNewBook implements IHandler {
         String body = " ";
         String contentType = request.validateContentType(request.getContentType());
         new Library();
-        Book newBook = new Book(4, "Herbert Schildt ", "Java 1.1: The Complete Reference", 345);
+        Book newBook = Book.createNewBook();
         Library.addBook(newBook);
 
         try {
@@ -39,6 +39,7 @@ public class AddNewBook implements IHandler {
         response.setVersion(request.getVersion());
         response.write();
         System.out.println(response.toString());
+
 
     }
 }

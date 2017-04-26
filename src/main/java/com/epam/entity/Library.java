@@ -37,11 +37,12 @@ public class Library {
 
     public static void deleteBook(Book deletedBook){
         new Library();
-        for (Book book : books) {
-            if (book.getId() == deletedBook.getId()) {
-                books.remove(book);
-            }
-        }
+//        for (Book book : books) {
+//            if (book.getId() == deletedBook.getId()) {
+//                books.remove(book);
+//            }
+//        }
+        books.remove(deletedBook);
     }
 
     public static void updateBook(Book book) {

@@ -3,7 +3,6 @@ package com.epam.handler.commands;
 import com.epam.actions.Request;
 import com.epam.actions.Response;
 import com.epam.entity.Book;
-import com.epam.entity.Library;
 import com.epam.handler.IHandler;
 import com.epam.utils.Constants;
 import com.epam.utils.JsonUtils;
@@ -23,10 +22,9 @@ public class DeleteBook implements IHandler {
 
         String body = " ";
         String contentType = request.validateContentType(request.getContentType());
-        Book deletedBook = Library.getCurrentBook(2);
 
         try {
-            Library.deleteBook(deletedBook);
+            Book deletedBook = Book.deleteBook();
             body = JsonUtils.toJson(deletedBook);
 
             System.out.println("Deleted book " + deletedBook);

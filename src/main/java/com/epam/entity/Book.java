@@ -33,6 +33,9 @@ public class Book {
     @JsonProperty("pages")
     private int pages;
 
+    public Book() {
+    }
+
     public Book(int id, String author, String title, int pages) {
         this.id = id;
         this.author = author;
@@ -104,6 +107,27 @@ public class Book {
                 '}' + "\r\n";
     }
 
+    public static Book createNewBook() {
+
+        Book newBook = new Book();
+        newBook.setId(3);
+        newBook.setAuthor("Herbert Schildt");
+        newBook.setTitle("Java 1.1: The Complete Reference");
+        newBook.setPages(543);
+        return newBook;
+    }
+
+    public static Book updateBook() {
+        Book updatedBook = Library.getCurrentBook(1);
+        updatedBook.setPages(555);
+        return updatedBook;
+    }
+
+    public static Book deleteBook() {
+        Book deletedBook = Library.getCurrentBook(2);
+        Library.deleteBook(deletedBook);
+        return deletedBook;
+    }
 
 
 }

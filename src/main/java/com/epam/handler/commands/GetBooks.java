@@ -39,6 +39,7 @@ public class GetBooks implements IHandler {
         response.setBody(body);
         response.setVersion(request.getVersion());
         response.write();
+        System.out.println(response.toString());
 
     }
 

@@ -11,7 +11,7 @@ import static com.jayway.restassured.RestAssured.given;
  * Created by Katerina_Karpenia on 4/19/2017.
  */
 
-public class CheckStatusCodeTest extends ConfigSteps {
+public class CheckStatusCodeTests extends ConfigSteps {
 
     @Test
     public void checkStatusCodeGetBooksTest() {

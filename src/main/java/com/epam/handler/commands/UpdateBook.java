@@ -25,9 +25,7 @@ public class UpdateBook implements IHandler {
         String contentType = request.validateContentType(request.getContentType());
 
         try {
-
-            Book updatedBook = Library.getCurrentBook(1);
-            updatedBook.setPages(45454);
+            Book updatedBook = Book.updateBook();
             Library.updateBook(updatedBook);
             body = JsonUtils.toJson(updatedBook);
 
