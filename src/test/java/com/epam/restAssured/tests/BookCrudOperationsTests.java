@@ -1,6 +1,6 @@
-package com.epam.tests;
+package com.epam.restAssured.tests;
 
-import com.epam.ConfigSteps;
+import com.epam.restAssured.ConfigSteps;
 import com.epam.entity.Book;
 import com.jayway.restassured.response.Response;
 import org.testng.Assert;

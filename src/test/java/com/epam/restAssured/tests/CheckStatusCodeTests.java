@@ -1,6 +1,6 @@
-package com.epam.tests;
+package com.epam.restAssured.tests;
 
-import com.epam.ConfigSteps;
+import com.epam.restAssured.ConfigSteps;
 import com.jayway.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -28,6 +28,12 @@ public class CheckStatusCodeTests extends ConfigSteps {
         Assert.assertEquals(addNewBook.getStatusCode(), 201);
     }
 
+//    @Test
+//    public void checkStatusCodeGetNotExistingBookTest() {
+//        given().
+//                when().get("/book/777").
+//                then().statusCode(404);
+//    }
 
 
 }

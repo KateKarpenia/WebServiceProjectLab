@@ -1,4 +1,4 @@
-package com.epam;
+package com.epam.restAssured;
 
 import com.jayway.restassured.RestAssured;
 import org.testng.annotations.BeforeClass;

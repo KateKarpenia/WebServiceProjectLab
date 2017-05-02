@@ -9,6 +9,7 @@ import java.util.List;
 public class Library {
 
     private static List<Book> books;
+    private static Book book;
 
     public Library() {
         if (books == null) {
@@ -23,6 +24,7 @@ public class Library {
     public static List<Book> getBooks() {
         return books;
     }
+
 
     public static Book getCurrentBook(int i) {
         new Library();
